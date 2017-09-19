@@ -1,4 +1,4 @@
-package com.sononpos.allcommunity.HttpHelper;
+package com.sononpos.animalvideos.dogandcatvideos.HttpHelper;
 
 /**
  * Created by nnnyyy on 2017-05-24.

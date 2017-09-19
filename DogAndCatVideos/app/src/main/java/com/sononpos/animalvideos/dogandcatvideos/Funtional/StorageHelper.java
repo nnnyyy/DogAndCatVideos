@@ -1,4 +1,4 @@
-package com.sononpos.allcommunity.Funtional;
+package com.sononpos.animalvideos.dogandcatvideos.Funtional;
 
 import android.content.Context;
 import android.content.SharedPreferences;

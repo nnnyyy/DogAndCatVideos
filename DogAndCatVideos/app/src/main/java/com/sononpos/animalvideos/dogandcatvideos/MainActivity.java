@@ -4,13 +4,8 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -27,8 +22,10 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.sononpos.animalvideos.dogandcatvideos.Funtional.LogHelper;
+import com.sononpos.animalvideos.dogandcatvideos.HttpHelper.HttpHelper;
 import com.sononpos.animalvideos.dogandcatvideos.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
@@ -59,6 +56,22 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         updateUI(user);
+
+        if(user != null) {
+            user.getToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                @Override
+                public void onComplete(@NonNull Task<GetTokenResult> task) {
+                    if(task.isSuccessful()) {
+                        String idToken = task.getResult().getToken();
+                        HttpHelper helper = new HttpHelper();
+                        //helper.RequestPost();
+                    }
+                    else {
+
+                    }
+                }
+            });
+        }
 
         mBind.btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,8 +136,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            LogHelper.di("signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            LogHelper.di("signInWithCredential:success name: " + user.getDisplayName() + ", uid : " + user.getUid());
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.

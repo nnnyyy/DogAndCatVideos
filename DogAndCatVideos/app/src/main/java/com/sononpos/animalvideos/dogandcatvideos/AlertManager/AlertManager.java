@@ -1,4 +1,4 @@
-package com.sononpos.allcommunity.AlertManager;
+package com.sononpos.animalvideos.dogandcatvideos.AlertManager;
 
 import android.app.AlertDialog;
 import android.content.Context;

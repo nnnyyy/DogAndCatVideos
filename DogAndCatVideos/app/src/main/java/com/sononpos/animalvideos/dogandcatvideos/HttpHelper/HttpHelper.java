@@ -1,4 +1,4 @@
-package com.sononpos.allcommunity.HttpHelper;
+package com.sononpos.animalvideos.dogandcatvideos.HttpHelper;
 
 import android.content.Context;
 import android.graphics.Bitmap;
