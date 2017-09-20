@@ -7,6 +7,13 @@
 var app = require('../app');
 var debug = require('debug')('DogAndCatVideosServer:server');
 var http = require('http');
+var https = require('https');
+var fs = require('fs');
+
+const options = {
+  key: fs.readFileSync('./keys/private.pem'),
+  cert: fs.readFileSync('./keys/cert.pem')
+};
 
 /**
  * Get port from environment and store in Express.
@@ -21,6 +28,9 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+var sec_server = https.createServer(options, app).listen(3002, function() {
+  console.log("HTTPS server listening on port " + 3002);
+})
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -86,5 +96,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  console.log("HTTP server listening on port " + addr.port);
 }

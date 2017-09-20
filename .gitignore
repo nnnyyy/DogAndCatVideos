@@ -1,0 +1,4 @@
+DogAndCatVideosServer/path/to/serviceAccountKey.json
+DogAndCatVideosServer/keys/private.pem
+DogAndCatVideosServer/keys/cert.pem
+apk/app-release.apk
